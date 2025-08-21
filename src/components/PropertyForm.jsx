@@ -1,0 +1,108 @@
+import React, { useState } from "react";
+import allProperties from "../Data/properties";
+import PropertyList from "./PropertyList";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+
+const PropertyForm = ({ filters }) => {
+  const { location, ptype, bedrooms } = filters || {};
+
+  // Apply filters
+  const filtered = allProperties.filter((prop) => {
+    return (
+      (!location ||
+        prop.location.toLowerCase().includes(location.toLowerCase())) &&
+      (!ptype || prop.type.toLowerCase().includes(ptype.toLowerCase())) &&
+      (!bedrooms || prop.bedrooms >= bedrooms)
+    );
+  });
+
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const firstPageCount = 9;
+  const itemsPerPage = 6; // after page 1
+
+  // Calculate start & end indexes
+  let startIndex, endIndex;
+
+  if (currentPage === 1) {
+    startIndex = 0;
+    endIndex = firstPageCount;
+  } else {
+    startIndex = firstPageCount + (currentPage - 2) * itemsPerPage;
+    endIndex = startIndex + itemsPerPage;
+  }
+
+  const currentProperties = filtered.slice(startIndex, endIndex);
+
+  // Calculate total pages
+  const totalPages =
+    filtered.length <= firstPageCount
+      ? 1
+      : 1 + Math.ceil((filtered.length - firstPageCount) / itemsPerPage);
+
+  return (
+    <div className=" layout max-w-[1240px] mx-auto px-4 py-10">
+      {/* Top Bar */}
+      <div className="flex flex-col lg:flex-row items-center justify-between mb-6 text-gray-700 gap-4">
+        {/* Left Section */}
+        <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
+          <button className="flex items-center gap-2 px-4 py-2 border rounded-md shadow-sm text-sm hover:bg-gray-100 transition">
+            <span>⚙️</span> More Filter
+          </button>
+          <p className="text-sm">
+            Showing {startIndex + 1} – {Math.min(endIndex, filtered.length)} of{" "}
+            {filtered.length} results
+          </p>
+        </div>
+
+        {/* Right Section */}
+        <div className="flex items-center gap-2 w-full lg:w-auto justify-end">
+          <span className="text-sm">Sort by:</span>
+          <select className="border rounded-md px-3 py-2 text-sm hover:border-green-600 transition">
+            <option>Default</option>
+            <option>Price (Low → High)</option>
+            <option>Price (High → Low)</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Property Grid */}
+      <PropertyList properties={currentProperties} />
+
+      {/* Pagination */}
+      {/* Pagination */}
+      <div className="flex justify-center items-center mt-8 gap-2">
+        <button
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage(currentPage - 1)}
+          className="p-2 rounded disabled:opacity-50"
+        >
+          <ChevronLeft className="w-4 h-4" />
+        </button>
+
+        {Array.from({ length: totalPages }).map((_, i) => (
+          <button
+            key={i}
+            className={`px-3 py-1 rounded ${
+              currentPage === i + 1 ? "bg-[#3D9970] text-white" : ""
+            }`}
+            onClick={() => setCurrentPage(i + 1)}
+          >
+            {i + 1}
+          </button>
+        ))}
+
+        <button
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage(currentPage + 1)}
+          className="p-2 rounded disabled:opacity-50"
+        >
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default PropertyForm;
