@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import allProperties from "../Data/properties";
 import PropertyList from "./PropertyList";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
+import { SlidersHorizontal } from "lucide-react";
 
 const PropertyForm = ({ filters }) => {
-  const { location, ptype, bedrooms } = filters || {};
+  const { location, bedrooms } = filters || {};
 
   // Apply filters
   const filtered = allProperties.filter((prop) => {
     return (
       (!location ||
         prop.location.toLowerCase().includes(location.toLowerCase())) &&
-      (!ptype || prop.type.toLowerCase().includes(ptype.toLowerCase())) &&
       (!bedrooms || prop.bedrooms >= bedrooms)
     );
   });
@@ -47,8 +46,11 @@ const PropertyForm = ({ filters }) => {
       <div className="flex flex-col lg:flex-row items-center justify-between mb-6 text-gray-700 gap-4">
         {/* Left Section */}
         <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
-          <button className="flex items-center gap-2 px-4 py-2 border rounded-md shadow-sm text-sm hover:bg-gray-100 transition">
-            <span>⚙️</span> More Filter
+          <button
+            className="flex items-center border px-3 py-2 rounded-md text-sm"
+            onClick={() => setShowFilter(!showFilter)}
+          >
+            <SlidersHorizontal className="w-4 h-4 mr-1" /> More Filter
           </button>
           <p className="text-sm">
             Showing {startIndex + 1} – {Math.min(endIndex, filtered.length)} of{" "}

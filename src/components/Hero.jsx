@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api/Axios."; // ✅ use centralized axios instance
 
 const Hero = ({ setProperties }) => {
   const [bedrooms, setBedrooms] = useState(0);
   const [location, setLocation] = useState("");
-  const [ptype, setPtype] = useState("");
 
   const increment = () => setBedrooms(bedrooms + 1);
   const decrement = () => {
@@ -15,15 +14,14 @@ const Hero = ({ setProperties }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.get("http://localhost:3000/api/properties", {
+      // ✅ call backend through axios instance
+      const response = await api.get("/properties", {
         params: {
           location,
-          type: ptype,
           beds: bedrooms,
         },
       });
 
-      // ✅ Use .data.data (backend wraps results in { success, data })
       if (setProperties && response.data.success) {
         setProperties(response.data.data);
       } else {

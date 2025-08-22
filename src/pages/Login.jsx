@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { FcGoogle } from "react-icons/fc";
-import axios from "axios";
+import axiosInstance from "../api/Axios"; // ✅ use axios instance
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -31,15 +31,13 @@ const Login = () => {
 
   const handleLogin = async (data) => {
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/auth/login",
-        data
-      );
+      // ✅ now using axiosInstance (baseURL already set)
+      const res = await axiosInstance.post("/api/auth/login", data);
 
-      // save token (localStorage for now, you can switch to cookies later)
+      // save token
       localStorage.setItem("token", res.data.token);
 
-      // redirect to dashboard
+      // redirect
       navigate("/dashboard");
     } catch (error) {
       console.error("Login error:", error);

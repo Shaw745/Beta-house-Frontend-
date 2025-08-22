@@ -6,8 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { FcGoogle } from "react-icons/fc";
 import { twMerge } from "tailwind-merge";
-import axios from "axios";
+import api from "../api/Axios"; // 👈 use axios instance
 
+// ✅ Validation Schema
 const registerSchema = Yup.object().shape({
   firstName: Yup.string()
     .required("First name is required")
@@ -35,23 +36,20 @@ const SignUp = () => {
     resolver: yupResolver(registerSchema),
   });
 
+  // ✅ Register Handler
   const handleRegister = async (data) => {
     try {
-      // 👇 Combine first + last name to match backend schema
       const payload = {
         name: `${data.firstName} ${data.lastName}`,
         email: data.email,
         password: data.password,
       };
 
-      const res = await axios.post(
-        "http://localhost:3000/api/auth/register",
-        payload
-      );
+      const res = await api.post("/auth/register", payload);
 
       if (res.status === 201) {
         alert("Registration successful! Please log in.");
-        navigate("/login"); // 👈 Redirect to login instead of dashboard
+        navigate("/login"); // ✅ Redirect to login page
       }
     } catch (error) {
       console.error("Register error:", error);
@@ -197,12 +195,12 @@ const SignUp = () => {
             <p className="text-red-500 text-sm">{errors.terms.message}</p>
           )}
 
-          {/* Show error */}
+          {/* Error Message */}
           {errorMessage && (
             <p className="text-red-500 text-sm">{errorMessage}</p>
           )}
 
-          {/* Submit Button */}
+          {/* Submit */}
           <button
             type="submit"
             className="bg-[#3D9970] w-full h-[56px] rounded-xl text-white font-medium text-lg hover:bg-[#31845e] transition"
