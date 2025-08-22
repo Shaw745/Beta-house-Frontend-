@@ -39,22 +39,19 @@ const SignUp = () => {
   // ✅ Register Handler
   const handleRegister = async (data) => {
     try {
-      const payload = {
-        name: `${data.firstName} ${data.lastName}`,
-        email: data.email,
-        password: data.password,
-      };
 
-      const res = await api.post("/auth/register", payload);
+
+      const res = await api.post("/auth/register", data);
 
       if (res.status === 201) {
         alert("Registration successful! Please log in.");
+        localStorage.setItem("registeredEmail", data.email); // Store email for login
         navigate("/login"); // ✅ Redirect to login page
       }
     } catch (error) {
       console.error("Register error:", error);
       setErrorMessage(error.response?.data?.message || "Registration failed");
-    }
+    } 
   };
 
   return (

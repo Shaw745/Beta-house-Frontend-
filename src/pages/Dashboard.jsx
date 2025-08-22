@@ -5,7 +5,7 @@ import PropertyForm from "../components/PropertyForm";
 import Discover from "../components/Discover";
 import Footer from "../components/Footer";
 
-const HomePage = () => {
+const Dashboard = () => {
   const [filters, setFilters] = useState(null); // search filters
 
   return (
@@ -25,4 +25,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Dashboard;
