@@ -46,8 +46,7 @@ const Login = () => {
     } catch (error) {
       console.error("Login error:", error);
       setErrorMessage(error.response?.data?.message || "Login failed");
-    }
-    finally {
+    } finally {
       setIsSubmitting(false); // ✅ reset submitting state
     }
   };

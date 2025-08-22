@@ -1,5 +1,5 @@
 import React from "react";
-import auth from "../../assets/auth.jpg";
+import auth from "../../assets/auth.png";
 
 const AuthWrapper = ({ children }) => {
   return (

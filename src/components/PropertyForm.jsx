@@ -1,29 +1,30 @@
 import React, { useState } from "react";
 import allProperties from "../Data/properties";
 import PropertyList from "./PropertyList";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { SlidersHorizontal } from "lucide-react";
+import { ChevronLeft, ChevronRight, SlidersHorizontal } from "lucide-react";
 
-const PropertyForm = ({ filters }) => {
-  const { location, bedrooms } = filters || {};
+const PropertyForm = () => {
+  // Filters
+  const [filters, setFilters] = useState({ location: "", bedrooms: "" });
+  const [showFilter, setShowFilter] = useState(false);
+
+  const { location, bedrooms } = filters;
 
   // Apply filters
   const filtered = allProperties.filter((prop) => {
     return (
       (!location ||
         prop.location.toLowerCase().includes(location.toLowerCase())) &&
-      (!bedrooms || prop.bedrooms >= bedrooms)
+      (!bedrooms || prop.bedrooms >= Number(bedrooms))
     );
   });
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const firstPageCount = 9;
-  const itemsPerPage = 6; // after page 1
+  const itemsPerPage = 6;
 
-  // Calculate start & end indexes
   let startIndex, endIndex;
-
   if (currentPage === 1) {
     startIndex = 0;
     endIndex = firstPageCount;
@@ -34,14 +35,20 @@ const PropertyForm = ({ filters }) => {
 
   const currentProperties = filtered.slice(startIndex, endIndex);
 
-  // Calculate total pages
   const totalPages =
     filtered.length <= firstPageCount
       ? 1
       : 1 + Math.ceil((filtered.length - firstPageCount) / itemsPerPage);
 
+  // Handle filter changes
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({ ...prev, [name]: value }));
+    setCurrentPage(1); // reset to page 1 after filter
+  };
+
   return (
-    <div className=" layout max-w-[1240px] mx-auto px-4 py-10">
+    <div className="layout max-w-[1240px] mx-auto px-4 py-10">
       {/* Top Bar */}
       <div className="flex flex-col lg:flex-row items-center justify-between mb-6 text-gray-700 gap-4">
         {/* Left Section */}
@@ -69,10 +76,34 @@ const PropertyForm = ({ filters }) => {
         </div>
       </div>
 
+      {/* Filter Panel */}
+      {showFilter && (
+        <div className="border rounded-md p-4 mb-6 bg-gray-50 shadow-sm flex flex-col sm:flex-row gap-4">
+          {/* Location Filter */}
+          <input
+            type="text"
+            name="location"
+            placeholder="Enter location"
+            value={filters.location}
+            onChange={handleFilterChange}
+            className="border px-3 py-2 rounded-md w-full sm:w-1/2"
+          />
+
+          {/* Bedrooms Filter */}
+          <input
+            type="number"
+            name="bedrooms"
+            placeholder="Min bedrooms"
+            value={filters.bedrooms}
+            onChange={handleFilterChange}
+            className="border px-3 py-2 rounded-md w-full sm:w-1/2"
+          />
+        </div>
+      )}
+
       {/* Property Grid */}
       <PropertyList properties={currentProperties} />
 
-      {/* Pagination */}
       {/* Pagination */}
       <div className="flex justify-center items-center mt-8 gap-2">
         <button

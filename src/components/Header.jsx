@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/beta.png";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
@@ -8,17 +8,14 @@ import { useAppContext } from "../hooks/useAppContext";
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { user, logout } = useAppContext();
+  const { user, logout, token } = useAppContext(); // ✅ pulling user + token from context
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // clear token
-    logout(); // use context logout to clear user and token
+    logout(); // ✅ clears localStorage + context
     setDropdownOpen(false);
-
-    // redirect to login page
-    navigate("/login");
+    navigate("/login"); // ✅ redirect
   };
 
   return (
@@ -50,7 +47,7 @@ const Header = () => {
 
         {/* Right Section */}
         <div className="hidden lg:flex items-center gap-4 relative">
-          {!user ? (
+          {!token || !user ? ( // ✅ only show signup/login if no user
             <>
               <button
                 onClick={() => navigate("/signup")}
@@ -73,7 +70,8 @@ const Header = () => {
                 className="w-10 h-10 rounded-full border border-gray-400"
               />
               <span className="text-white font-medium">
-                {user.firstName} {user.lastName}{" "}
+                {user.firstName || user.first_name}{" "}
+                {user.lastName || user.last_name}
               </span>
               <FaChevronDown
                 className="text-white"
@@ -146,7 +144,7 @@ const Header = () => {
 
             {/* Buttons / User Menu */}
             <div className="flex flex-col gap-4 mt-4">
-              {!user ? (
+              {!token || !user ? (
                 <>
                   <button
                     onClick={() => navigate("/signup")}
@@ -168,7 +166,7 @@ const Header = () => {
                     alt="user avatar"
                     className="w-14 h-14 rounded-full border border-gray-400"
                   />
-                  <span className="text-black font-medium">
+                  <span className="text-white font-medium">
                     {user.firstName} {user.lastName}
                   </span>
                   <button
