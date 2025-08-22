@@ -3,7 +3,7 @@ import allProperties from "../Data/properties";
 import PropertyList from "./PropertyList";
 import { ChevronLeft, ChevronRight, SlidersHorizontal } from "lucide-react";
 
-const PropertyForm = () => {
+const PropertyForm = () => { 
   const [filters, setFilters] = useState({ location: "", bedrooms: "" });
   const [showFilter, setShowFilter] = useState(false);
 

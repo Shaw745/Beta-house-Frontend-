@@ -26,7 +26,7 @@ const PropertyList = ({ properties }) => {
               className="h-full w-full object-cover"
             />
 
-            <div className="absolute top-3 left-3 flex gap-47">
+            <div className="absolute top-3 left-3 flex md:gap-52 gap-2 ">
               {property.tags?.map((tag, i) => (
                 <span
                   key={i}
