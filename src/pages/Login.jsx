@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { FcGoogle } from "react-icons/fc";
-import axiosInstance from "../api/Axios"; // ✅ use axios instance
+import axiosInstance from "../api/Axios"; 
 import { useAppContext } from "../hooks/useAppContext";
 
 const loginSchema = Yup.object().shape({
@@ -22,7 +22,7 @@ const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { login } = useAppContext(); // ✅ get login from context
+  const { login } = useAppContext(); 
 
   const {
     register,
@@ -35,19 +35,15 @@ const Login = () => {
   const handleLogin = async (data) => {
     setIsSubmitting(true);
     try {
-      // ✅ now using axiosInstance (baseURL already set)
       const { data: mydata } = await axiosInstance.post("/auth/login", data);
 
-      login(mydata.token, mydata.user); // ✅ use context login to set user and token
-      // save token
-
-      // redirect
+      login(mydata.token, mydata.user); 
       navigate("/dashboard");
     } catch (error) {
       console.error("Login error:", error);
       setErrorMessage(error.response?.data?.message || "Login failed");
     } finally {
-      setIsSubmitting(false); // ✅ reset submitting state
+      setIsSubmitting(false); 
     }
   };
 
@@ -92,12 +88,10 @@ const Login = () => {
             <p className="text-red-500 text-sm">{errors.password.message}</p>
           )}
 
-          {/* Show error */}
           {errorMessage && (
             <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
           )}
 
-          {/* Remember Me + Forgot Password */}
           <div className="flex items-center justify-between font-medium text-[16px] mb-4">
             <div className="flex items-center gap-2">
               <input
@@ -117,7 +111,6 @@ const Login = () => {
             <Link className="text-[#EC5E5E]">Forgot Password</Link>
           </div>
 
-          {/* Login Button */}
           <button
             type="submit"
             disabled={isSubmitting}
@@ -130,12 +123,10 @@ const Login = () => {
             )}
           </button>
 
-          {/* Divider */}
           <div className="flex items-center justify-center gap-1 w-full my-4">
             <p className="font-[600] text-[#4F4E4E] text-[16px]">or</p>
           </div>
 
-          {/* Google Button */}
           <a
             href="https://mail.google.com/"
             target="_blank"
@@ -145,7 +136,6 @@ const Login = () => {
             <FcGoogle className="text-2xl" /> Continue with Google
           </a>
 
-          {/* Footer */}
           <div className="flex items-center justify-center gap-2 font-[400] text-[18px]">
             <p>New User?</p>
             <Link to="/signup" className="text-[#3D9970]">

@@ -6,17 +6,15 @@ import Discover from "../components/Discover";
 import Footer from "../components/Footer";
 
 const HomePage = () => {
-  const [properties, setProperties] = useState([]); // 👈 actual data from backend
+  const [properties, setProperties] = useState([]); 
 
   return (
     <div>
       <div className="hero max-h-[960px] h-screen ">
         <Header />
-        {/* Hero fetches from backend and updates parent */}
         <Hero setProperties={setProperties} />
       </div>
 
-      {/* PropertyForm now receives properties */}
       <PropertyForm properties={properties} />
 
       <Discover />

@@ -1,4 +1,3 @@
-// import property images
 
 import map1 from "../assets/Properties/map1.png";
 import map2 from "../assets/Properties/map2.png";

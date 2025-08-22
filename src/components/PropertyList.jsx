@@ -6,7 +6,7 @@ import {
   FaShareAlt,
   FaHeart,
 } from "react-icons/fa";
-import arrow from "../assets/arrow.png"; // adjust import paths if needed
+import arrow from "../assets/arrow.png";
 import connect from "../assets/connect.png";
 import video from "../assets/video.png";
 import image from "../assets/image.png";
@@ -19,7 +19,6 @@ const PropertyList = ({ properties }) => {
           key={property.id}
           className="rounded-2xl shadow-md overflow-hidden bg-white w-full sm:w-[48%] lg:w-[32%]"
         >
-          {/* Image Section */}
           <div className="relative h-56 w-full">
             <img
               src={property.image}
@@ -43,7 +42,6 @@ const PropertyList = ({ properties }) => {
             </div> 
 
 
-            {/* Overlay Icons */}
             <div className="absolute bottom-3 right-3 flex gap-2">
               <button className="p-2 bg-opacity-70 text-white rounded hover:bg-opacity-90">
                 <img src={connect} alt="string" />
@@ -57,7 +55,6 @@ const PropertyList = ({ properties }) => {
             </div>
           </div>
 
-          {/* Content */}
           <div className="p-4 space-y-2">
             <h3 className="font-semibold text-lg">{property.title}</h3>
             <p className="text-sm text-gray-500 flex items-center gap-1">
@@ -65,7 +62,6 @@ const PropertyList = ({ properties }) => {
               {property.location}
             </p>
 
-            {/* Bed & Bath */}
             <div className="flex gap-6 text-gray-600 text-sm mt-2">
               <span className="flex items-center gap-1">
                 <FaBed /> {property.bedrooms} Bedrooms
@@ -75,7 +71,6 @@ const PropertyList = ({ properties }) => {
               </span>
             </div>
 
-            {/* Price & Actions */}
             <div className="flex justify-between items-center border-t pt-3 mt-3 border-gray-300">
               <p className="text-blue-600 font-bold">{property.price}</p>
               <div className="flex gap-3">

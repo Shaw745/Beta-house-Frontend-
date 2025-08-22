@@ -8,25 +8,23 @@ import { useAppContext } from "../hooks/useAppContext";
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { user, logout, token } = useAppContext(); // ✅ pulling user + token from context
+  const { user, logout, token } = useAppContext();
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout(); // ✅ clears localStorage + context
+    logout();
     setDropdownOpen(false);
-    navigate("/login"); // ✅ redirect
+    navigate("/login");
   };
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 shadow-xl h-[80px] bg-transparent">
       <nav className="component flex items-center justify-between px-4 py-3 bg-transparent">
-        {/* Logo */}
         <Link to="/">
           <img src={logo} alt="logo" className="w-[120px]" />
         </Link>
 
-        {/* Desktop Links */}
         <div className="hidden lg:flex items-center gap-8">
           <Link to="/" className="nav-links">
             Home
@@ -45,9 +43,8 @@ const Header = () => {
           </Link>
         </div>
 
-        {/* Right Section */}
         <div className="hidden lg:flex items-center gap-4 relative">
-          {!token || !user ? ( // ✅ only show signup/login if no user
+          {!token || !user ? (
             <>
               <button
                 onClick={() => navigate("/signup")}
@@ -92,7 +89,6 @@ const Header = () => {
           )}
         </div>
 
-        {/* Mobile Menu Toggle */}
         <div className="lg:hidden">
           <button onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? (
@@ -103,7 +99,6 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {menuOpen && (
           <div className="absolute top-[70px] left-0 w-full bg-[#1a1a1a] flex flex-col items-center gap-6 py-6 z-50">
             <Link
@@ -142,7 +137,6 @@ const Header = () => {
               Contact Us
             </Link>
 
-            {/* Buttons / User Menu */}
             <div className="flex flex-col gap-4 mt-4">
               {!token || !user ? (
                 <>
@@ -167,7 +161,7 @@ const Header = () => {
                     className="w-14 h-14 rounded-full border border-gray-400"
                   />
                   <span className="text-white font-medium">
-                    Welcome, {user.firstName} {user.lastName}
+                    {user.firstName} {user.lastName}
                   </span>
                   <button
                     onClick={handleLogout}

@@ -11,13 +11,12 @@ const Hero = ({ setProperties }) => {
     if (bedrooms > 0) setBedrooms(bedrooms - 1);
   };
 const handleSearch = async (e) => {
-  e.preventDefault(); // 👈 prevent page reload
   try {
     const res = await axiosInstance.get("/properties", {
       params: { location, beds: bedrooms },
     });
     console.log("Properties:", res.data);
-    setProperties(res.data.data); // 👈 update parent
+    setProperties(res.data.data); 
   } catch (err) {
     console.error("Error fetching properties:", err);
   }
@@ -26,7 +25,6 @@ const handleSearch = async (e) => {
 
   return (
     <div className="layout px-4">
-      {/* Heading */}
       <div className="text-center text-white mt-[60px] lg:mt-[120px] lg:mb-[50px]">
         <h1 className="font-bold text-[32px] sm:text-[48px] lg:text-[68px] leading-tight">
           Browse Our Properties
@@ -37,13 +35,11 @@ const handleSearch = async (e) => {
         </p>
       </div>
 
-      {/* Search form */}
       <div className="bg-[#FFFFFF33] lg:h-[135px] px-5">
         <form
           onSubmit={handleSearch}
           className="flex flex-col lg:flex-row items-stretch lg:h-[85px] max-w-[1240px] mx-auto w-full bg-white rounded-[10px] mt-8 lg:mt-16 text-black overflow-hidden shadow-md md:translate-y-[30%]"
         >
-          {/* LOCATION */}
           <div className="flex-1 min-w-[250px] border-b lg:border-b-0 lg:border-r border-gray-300 p-3">
             <label
               htmlFor="location"
@@ -61,7 +57,6 @@ const handleSearch = async (e) => {
             />
           </div>
 
-          {/* PROPERTY TYPE */}
           <div className="flex-1 min-w-[250px] border-b lg:border-b-0 lg:border-r border-gray-300 p-3">
             <label
               htmlFor="ptype"
@@ -77,7 +72,6 @@ const handleSearch = async (e) => {
             />
           </div>
 
-          {/* BEDROOM */}
           <div className="flex-1 min-w-[200px] border-b lg:border-b-0 border-gray-300 p-3">
             <label
               htmlFor="bedroom"
@@ -104,7 +98,6 @@ const handleSearch = async (e) => {
             </div>
           </div>
 
-          {/* BUTTON */}
           <button
             type="submit"
             className="w-full lg:w-[250px] bg-[#3D9970] hover:bg-[#2e7b5d] text-white font-semibold px-4 py-4 lg:py-0 text-[16px] sm:text-[18px] transition"

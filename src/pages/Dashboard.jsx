@@ -6,7 +6,7 @@ import Discover from "../components/Discover";
 import Footer from "../components/Footer";
 
 const Dashboard = () => {
-  const [properties, setProperties] = useState([]); // 👈 actual data from backend
+  const [properties, setProperties] = useState([]);
 
   return (
     <div>

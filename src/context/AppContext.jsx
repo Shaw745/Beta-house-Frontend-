@@ -36,7 +36,5 @@ const AppProvider = ({ children }) => {
   );
 };
 
-//useContext hook
-//appcontexta
 
 export default AppProvider;

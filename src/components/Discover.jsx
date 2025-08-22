@@ -66,7 +66,7 @@ const properties = [
 
 export default function PopularProperties() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 4; // how many cards to show at once
+  const itemsPerPage = 4; 
 
   const prevSlide = () => {
     setCurrentIndex((prev) =>
@@ -87,7 +87,6 @@ export default function PopularProperties() {
       </h2>
 
       <div className="relative flex items-center">
-        {/* Left Arrow */}
         <button
           onClick={prevSlide}
           className="absolute left-0 z-10  bg-[#F4F4F4] rounded-full shadow flex items-center justify-center w-10 h-10"
@@ -95,7 +94,6 @@ export default function PopularProperties() {
           <FaArrowLeft color="[#555555]" className="text-xl" />
         </button>
 
-        {/* Slider Wrapper */}
         <div className="overflow-hidden w-full">
           <div
             className="flex gap-6 transition-transform duration-500"
@@ -109,7 +107,6 @@ export default function PopularProperties() {
                 key={property.id}
                 className="relative rounded-lg shadow-md w-64 shrink-0 overflow-hidden flex flex-col"
               >
-                {/* Dummy Image */}
                 <img
                   src={
                     [discover1, discover2, discover3, discover4][
@@ -137,7 +134,6 @@ export default function PopularProperties() {
           </div>
         </div>
 
-        {/* Right Arrow */}
         <button
           onClick={nextSlide}
           className="absolute right-0 z-10 bg-[#3D9970] rounded-full shadow flex items-center justify-center w-10 h-10"

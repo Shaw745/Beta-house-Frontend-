@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { FcGoogle } from "react-icons/fc";
 import { twMerge } from "tailwind-merge";
 import axiosInstance from "../api/Axios";
-// ✅ Validation Schema
+
 const registerSchema = Yup.object().shape({
   firstName: Yup.string()
     .required("First name is required")
@@ -36,22 +36,21 @@ const SignUp = () => {
     resolver: yupResolver(registerSchema),
   });
 
-  // ✅ Register Handler
   const handleRegister = async (data) => {
-    setIsSubmitting(true); // Set submitting state
+    setIsSubmitting(true);
     try {
       const res = await axiosInstance.post("/auth/register", data);
 
       if (res.status === 201) {
         alert("Registration successful! Please log in.");
-        localStorage.setItem("registeredEmail", data.email); // Store email for login
-        navigate("/login"); // ✅ Redirect to login page
+        localStorage.setItem("registeredEmail", data.email); 
+        navigate("/login");
       }
     } catch (error) {
       console.error("Register error:", error);
       setErrorMessage(error.response?.data?.message || "Registration failed");
     } finally {
-      setIsSubmitting(false); // Reset submitting state
+      setIsSubmitting(false);
     }
   };
 
@@ -67,7 +66,6 @@ const SignUp = () => {
         </p>
 
         <form onSubmit={handleSubmit(handleRegister)} className="space-y-4">
-          {/* First & Last Name */}
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <label htmlFor="fname" className="alroe">
@@ -111,7 +109,6 @@ const SignUp = () => {
             </div>
           </div>
 
-          {/* Email */}
           <div>
             <label htmlFor="email" className="alroe">
               Email
@@ -131,7 +128,6 @@ const SignUp = () => {
             )}
           </div>
 
-          {/* Password */}
           <div>
             <label htmlFor="password" className="alroe">
               Password
@@ -151,7 +147,6 @@ const SignUp = () => {
             )}
           </div>
 
-          {/* Confirm Password */}
           <div>
             <label htmlFor="cpassword" className="alroe">
               Confirm Password
@@ -173,7 +168,6 @@ const SignUp = () => {
             )}
           </div>
 
-          {/* Terms */}
           <div className="flex items-start gap-2">
             <input
               type="checkbox"
@@ -193,12 +187,10 @@ const SignUp = () => {
             <p className="text-red-500 text-sm">{errors.terms.message}</p>
           )}
 
-          {/* Error Message */}
           {errorMessage && (
             <p className="text-red-500 text-sm">{errorMessage}</p>
           )}
 
-          {/* Submit */}
           <button
             type="submit"
             className="bg-[#3D9970] w-full h-[56px] rounded-xl text-white font-medium text-lg hover:bg-[#31845e] transition"
@@ -210,14 +202,12 @@ const SignUp = () => {
             )}
           </button>
 
-          {/* Divider */}
           <div className="flex items-center justify-center gap-3 w-full my-4">
             <span className="flex-1 h-px bg-gray-300"></span>
             <p className="text-gray-600 text-sm font-medium">or</p>
             <span className="flex-1 h-px bg-gray-300"></span>
           </div>
 
-          {/* Google */}
           <a
             href="https://accounts.google.com/signin"
             target="_blank"
@@ -227,7 +217,6 @@ const SignUp = () => {
             <FcGoogle className="text-2xl" /> Continue with Google
           </a>
 
-          {/* Footer */}
           <div className="text-center text-[15px]">
             Already have an account?{" "}
             <Link to="/login" className="text-[#3D9970] font-medium">
