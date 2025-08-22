@@ -46,7 +46,7 @@ const PropertyForm = () => {
   return (
     <div className="layout max-w-[1240px] mx-auto px-4 py-10">
       <div className="flex flex-col lg:flex-row items-center justify-between mb-6 text-gray-700 gap-4">
-        <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
+        <div className="flex flex-col sm:flex-row text-gray-400 items-center gap-4 w-full lg:w-auto">
           <button
             className="flex items-center border px-3 py-2 rounded-md text-sm"
             onClick={() => setShowFilter(!showFilter)}
@@ -59,7 +59,7 @@ const PropertyForm = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-2 w-full lg:w-auto justify-end">
+        <div className="flex items-center gap-2 w-full lg:w-auto justify-end text-gray-400">
           <span className="text-sm">Sort by:</span>
           <select className="border rounded-md px-3 py-2 text-sm hover:border-green-600 transition">
             <option>Default</option>
@@ -70,7 +70,7 @@ const PropertyForm = () => {
       </div>
 
       {showFilter && (
-        <div className="border rounded-md p-4 mb-6 bg-gray-50 shadow-sm flex flex-col sm:flex-row gap-4">
+        <div className="border rounded-md p-4 mb-6 bg-gray-50 shadow-sm flex text-black  flex-col sm:flex-row gap-4">
           <input
             type="text"
             name="location"
