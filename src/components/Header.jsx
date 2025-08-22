@@ -16,7 +16,6 @@ const Header = () => {
     // clear token
     logout(); // use context logout to clear user and token
     setDropdownOpen(false);
-
     navigate("/login");
   };
 
