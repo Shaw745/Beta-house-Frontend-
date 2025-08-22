@@ -73,7 +73,6 @@ const Header = () => {
                 className="w-10 h-10 rounded-full border border-gray-400"
               />
               <span className="text-white font-medium">
-                {" "}
                 {user.firstName} {user.lastName}{" "}
               </span>
               <FaChevronDown
@@ -169,7 +168,7 @@ const Header = () => {
                     alt="user avatar"
                     className="w-14 h-14 rounded-full border border-gray-400"
                   />
-                  <span className="text-white font-medium">
+                  <span className="text-black font-medium">
                     {user.firstName} {user.lastName}
                   </span>
                   <button

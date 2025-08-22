@@ -19,6 +19,7 @@ const loginSchema = Yup.object().shape({
 
 const Login = () => {
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { login } = useAppContext(); // ✅ get login from context
@@ -32,6 +33,7 @@ const Login = () => {
   });
 
   const handleLogin = async (data) => {
+    setIsSubmitting(true);
     try {
       // ✅ now using axiosInstance (baseURL already set)
       const { data: mydata } = await axiosInstance.post("/auth/login", data);
@@ -44,6 +46,9 @@ const Login = () => {
     } catch (error) {
       console.error("Login error:", error);
       setErrorMessage(error.response?.data?.message || "Login failed");
+    }
+    finally {
+      setIsSubmitting(false); // ✅ reset submitting state
     }
   };
 
@@ -116,9 +121,14 @@ const Login = () => {
           {/* Login Button */}
           <button
             type="submit"
+            disabled={isSubmitting}
             className="bg-[#3D9970] w-full h-[64px] rounded-[15px] font-[400] text-[22px] text-[#FFFFFF]"
           >
-            Login
+            {isSubmitting ? (
+              <span className="loading loading-spinner loading-md text-black"></span>
+            ) : (
+              "Login"
+            )}
           </button>
 
           {/* Divider */}

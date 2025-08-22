@@ -26,6 +26,7 @@ const registerSchema = Yup.object().shape({
 const SignUp = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -37,9 +38,8 @@ const SignUp = () => {
 
   // ✅ Register Handler
   const handleRegister = async (data) => {
+    setIsSubmitting(true); // Set submitting state
     try {
-
-
       const res = await axiosInstance.post("/auth/register", data);
 
       if (res.status === 201) {
@@ -50,7 +50,9 @@ const SignUp = () => {
     } catch (error) {
       console.error("Register error:", error);
       setErrorMessage(error.response?.data?.message || "Registration failed");
-    } 
+    } finally {
+      setIsSubmitting(false); // Reset submitting state
+    }
   };
 
   return (
@@ -200,9 +202,12 @@ const SignUp = () => {
           <button
             type="submit"
             className="bg-[#3D9970] w-full h-[56px] rounded-xl text-white font-medium text-lg hover:bg-[#31845e] transition"
-            
           >
-            Sign up
+            {isSubmitting ? (
+              <span className="loading loading-spinner loading-md text-black"></span>
+            ) : (
+              "sign up"
+            )}
           </button>
 
           {/* Divider */}
