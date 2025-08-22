@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/beta.png";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { FaChevronDown } from "react-icons/fa";
-import { useAppContext } from "../Hooks/useAppContext";
+import { useAppContext } from "../hooks/useAppContext";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,6 +16,8 @@ const Header = () => {
     // clear token
     logout(); // use context logout to clear user and token
     setDropdownOpen(false);
+
+    // redirect to login page
     navigate("/login");
   };
 
