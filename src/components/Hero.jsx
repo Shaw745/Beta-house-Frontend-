@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import api from "../api/Axios."; // ✅ use centralized axios instance
+import axiosInstance from "../api/Axios";
+
 
 const Hero = ({ setProperties }) => {
   const [bedrooms, setBedrooms] = useState(0);
@@ -15,7 +16,7 @@ const Hero = ({ setProperties }) => {
 
     try {
       // ✅ call backend through axios instance
-      const response = await api.get("/properties", {
+      const response = await axiosInstance.get("/properties", {
         params: {
           location,
           beds: bedrooms,

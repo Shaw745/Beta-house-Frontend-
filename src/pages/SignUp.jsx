@@ -6,8 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { FcGoogle } from "react-icons/fc";
 import { twMerge } from "tailwind-merge";
-import api from "../api/Axios"; // 👈 use axios instance
-
+import axiosInstance from "../api/Axios";
 // ✅ Validation Schema
 const registerSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -41,7 +40,7 @@ const SignUp = () => {
     try {
 
 
-      const res = await api.post("/auth/register", data);
+      const res = await axiosInstance.post("/auth/register", data);
 
       if (res.status === 201) {
         alert("Registration successful! Please log in.");
