@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/beta.png";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { FaChevronDown } from "react-icons/fa";
+import { useAppContext } from "../hooks/useAppContext";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { user, logout } = useAppContext();
 
   const navigate = useNavigate();
 
@@ -19,8 +21,7 @@ const Header = () => {
 
   const handleLogout = () => {
     // clear token
-    localStorage.removeItem("token");
-
+    logout(); // use context logout to clear user and token
     setIsLoggedIn(false);
     setDropdownOpen(false);
 
@@ -57,7 +58,7 @@ const Header = () => {
 
         {/* Right Section */}
         <div className="hidden lg:flex items-center gap-4 relative">
-          {!isLoggedIn ? (
+          {!user ? (
             <>
               <button
                 onClick={() => navigate("/signup")}
@@ -79,7 +80,7 @@ const Header = () => {
                 alt="user avatar"
                 className="w-10 h-10 rounded-full border border-gray-400"
               />
-              <span className="text-white font-medium">Michael Idioha</span>
+              <span className="text-white font-medium"> {user.firstName } { user.lastName} </span>
               <FaChevronDown
                 className="text-white"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -151,7 +152,7 @@ const Header = () => {
 
             {/* Buttons / User Menu */}
             <div className="flex flex-col gap-4 mt-4">
-              {!isLoggedIn ? (
+              {!user? (
                 <>
                   <button
                     onClick={() => navigate("/signup")}
@@ -173,7 +174,7 @@ const Header = () => {
                     alt="user avatar"
                     className="w-14 h-14 rounded-full border border-gray-400"
                   />
-                  <span className="text-white font-medium">Michael Idioha</span>
+                  <span className="text-white font-medium">{user.firstName} {user.lastName}</span>
                   <button
                     onClick={handleLogout}
                     className="cursor-pointer w-[200px] h-[45px] rounded-[8px] font-[400] text-[16px] text-[#F5F5F5] bg-red-600"
