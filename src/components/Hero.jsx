@@ -10,28 +10,19 @@ const Hero = ({ setProperties }) => {
   const decrement = () => {
     if (bedrooms > 0) setBedrooms(bedrooms - 1);
   };
+const handleSearch = async (e) => {
+  e.preventDefault(); // 👈 prevent page reload
+  try {
+    const res = await axiosInstance.get("/properties", {
+      params: { location, beds: bedrooms },
+    });
+    console.log("Properties:", res.data);
+    setProperties(res.data.data); // 👈 update parent
+  } catch (err) {
+    console.error("Error fetching properties:", err);
+  }
+};
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-
-    try {
-      // ✅ call backend through axios instance
-      const response = await axiosInstance.get("/properties", {
-        params: {
-          location,
-          beds: bedrooms,
-        },
-      });
-
-      if (setProperties && response.data.success) {
-        setProperties(response.data.data);
-      } else {
-        console.warn("No properties found or backend error.");
-      }
-    } catch (error) {
-      console.error("Error fetching properties:", error.message);
-    }
-  };
 
   return (
     <div className="layout px-4">
@@ -50,7 +41,7 @@ const Hero = ({ setProperties }) => {
       <div className="bg-[#FFFFFF33] lg:h-[135px] px-5">
         <form
           onSubmit={handleSearch}
-          className="flex flex-col lg:flex-row items-stretch lg:h-[85px] max-w-[1240px] mx-auto w-full bg-white rounded-[10px] mt-8 lg:mt-16 text-black overflow-hidden shadow-md"
+          className="flex flex-col lg:flex-row items-stretch lg:h-[85px] max-w-[1240px] mx-auto w-full bg-white rounded-[10px] mt-8 lg:mt-16 text-black overflow-hidden shadow-md md:translate-y-[30%]"
         >
           {/* LOCATION */}
           <div className="flex-1 min-w-[250px] border-b lg:border-b-0 lg:border-r border-gray-300 p-3">

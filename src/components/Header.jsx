@@ -7,25 +7,17 @@ import { useAppContext } from "../hooks/useAppContext";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { user, logout } = useAppContext();
 
   const navigate = useNavigate();
 
-  // check token on mount
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  }, []);
 
   const handleLogout = () => {
     // clear token
     logout(); // use context logout to clear user and token
-    setIsLoggedIn(false);
     setDropdownOpen(false);
 
-    // redirect to login page
     navigate("/login");
   };
 
