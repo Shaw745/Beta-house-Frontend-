@@ -167,7 +167,7 @@ const Header = () => {
                     className="w-14 h-14 rounded-full border border-gray-400"
                   />
                   <span className="text-white font-medium">
-                    {user.firstName} {user.lastName}
+                    Welcome, {user.firstName} {user.lastName}
                   </span>
                   <button
                     onClick={handleLogout}
