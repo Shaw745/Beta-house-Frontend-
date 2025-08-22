@@ -6,8 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { FcGoogle } from "react-icons/fc";
 import axiosInstance from "../api/Axios"; // ✅ use axios instance
-import { useAppContext } from "../hooks/useAppContext";
-
+import { useAppContext } from "../Hooks/useAppContext";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -35,12 +34,10 @@ const Login = () => {
   const handleLogin = async (data) => {
     try {
       // ✅ now using axiosInstance (baseURL already set)
-      const {data: mydata }= await axiosInstance.post("/auth/login", data);
+      const { data: mydata } = await axiosInstance.post("/auth/login", data);
 
       login(mydata.token, mydata.user); // ✅ use context login to set user and token
       // save token
-
-
 
       // redirect
       navigate("/dashboard");

@@ -200,6 +200,7 @@ const SignUp = () => {
           <button
             type="submit"
             className="bg-[#3D9970] w-full h-[56px] rounded-xl text-white font-medium text-lg hover:bg-[#31845e] transition"
+            
           >
             Sign up
           </button>

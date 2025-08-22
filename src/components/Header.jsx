@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/beta.png";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { FaChevronDown } from "react-icons/fa";
-import { useAppContext } from "../hooks/useAppContext";
+import { useAppContext } from "../Hooks/useAppContext";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,7 +11,6 @@ const Header = () => {
   const { user, logout } = useAppContext();
 
   const navigate = useNavigate();
-
 
   const handleLogout = () => {
     // clear token
@@ -72,7 +71,10 @@ const Header = () => {
                 alt="user avatar"
                 className="w-10 h-10 rounded-full border border-gray-400"
               />
-              <span className="text-white font-medium"> {user.firstName } { user.lastName} </span>
+              <span className="text-white font-medium">
+                {" "}
+                {user.firstName} {user.lastName}{" "}
+              </span>
               <FaChevronDown
                 className="text-white"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -144,7 +146,7 @@ const Header = () => {
 
             {/* Buttons / User Menu */}
             <div className="flex flex-col gap-4 mt-4">
-              {!user? (
+              {!user ? (
                 <>
                   <button
                     onClick={() => navigate("/signup")}
@@ -166,7 +168,9 @@ const Header = () => {
                     alt="user avatar"
                     className="w-14 h-14 rounded-full border border-gray-400"
                   />
-                  <span className="text-white font-medium">{user.firstName} {user.lastName}</span>
+                  <span className="text-white font-medium">
+                    {user.firstName} {user.lastName}
+                  </span>
                   <button
                     onClick={handleLogout}
                     className="cursor-pointer w-[200px] h-[45px] rounded-[8px] font-[400] text-[16px] text-[#F5F5F5] bg-red-600"
