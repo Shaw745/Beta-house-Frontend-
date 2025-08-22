@@ -82,8 +82,6 @@ const Hero = ({ setProperties }) => {
               type="text"
               id="ptype"
               placeholder="eg. Duplex, Bedroom Flat"
-              value={ptype}
-              onChange={(e) => setPtype(e.target.value)}
               className="w-full outline-none placeholder:text-[#787878] text-center text-sm sm:text-base"
             />
           </div>
