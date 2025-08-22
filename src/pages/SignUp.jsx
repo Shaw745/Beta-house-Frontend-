@@ -56,7 +56,7 @@ const SignUp = () => {
 
   return (
     <AuthWrapper>
-      <div className="max-w-[500px] w-full">
+      <div className="lg:p-[50px] lg:pl-[80px] md:w-[600px]">
         <h1 className="text-gray-900 dark:text-gray-100 font-semibold text-[22px] md:text-[28px] mb-3 leading-snug">
           Join our community of home seekers and explore the possibilities that
           await.
