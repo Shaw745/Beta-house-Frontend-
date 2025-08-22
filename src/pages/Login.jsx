@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { FcGoogle } from "react-icons/fc";
-import axiosInstance from "../api/Axios"; 
+import axiosInstance from "../api/Axios";
 import { useAppContext } from "../hooks/useAppContext";
 
 const loginSchema = Yup.object().shape({
@@ -22,7 +22,7 @@ const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { login } = useAppContext(); 
+  const { login } = useAppContext();
 
   const {
     register,
@@ -37,29 +37,32 @@ const Login = () => {
     try {
       const { data: mydata } = await axiosInstance.post("/auth/login", data);
 
-      login(mydata.token, mydata.user); 
+      login(mydata.token, mydata.user);
       navigate("/dashboard");
     } catch (error) {
       console.error("Login error:", error);
       setErrorMessage(error.response?.data?.message || "Login failed");
     } finally {
-      setIsSubmitting(false); 
+      setIsSubmitting(false);
     }
   };
 
   return (
     <AuthWrapper>
       <div className="lg:p-[50px] lg:pl-[80px] md:w-[600px]">
-        <h1 className="text-[#181A20] dark:text-white font-[600] text-[20px] md:text-[28px] mb-1">
+        <h1 className="text-gray-900 dark:text-gray-100 font-semibold text-[20px] md:text-[28px] mb-1">
           Welcome Back to BetaHouse!
         </h1>
-        <p className="text-[#181A20D1] dark:text-gray-300 text-[16px] font-[400] mb-3">
+        <p className="text-gray-700 dark:text-gray-300 text-[16px] font-normal mb-3">
           Let’s get started by filling out the information below
         </p>
 
         <form onSubmit={handleSubmit(handleLogin)}>
           {/* Email */}
-          <label htmlFor="email" className="block mb-1 text-gray-700 dark:text-gray-300">
+          <label
+            htmlFor="email"
+            className="block mb-1 text-gray-700 dark:text-gray-300"
+          >
             Email
           </label>
           <input
@@ -77,7 +80,10 @@ const Login = () => {
           )}
 
           {/* Password */}
-          <label htmlFor="password" className="block mt-4 mb-1 text-gray-700 dark:text-gray-300">
+          <label
+            htmlFor="password"
+            className="block mt-4 mb-1 text-gray-700 dark:text-gray-300"
+          >
             Password
           </label>
           <input
@@ -109,7 +115,7 @@ const Login = () => {
               />
               <label
                 htmlFor="rememberMe"
-                className="text-[#716F6F] dark:text-gray-400 text-[16px] font-medium"
+                className="text-gray-700 dark:text-gray-400 text-[16px] font-medium"
               >
                 Remember Me
               </label>
@@ -131,7 +137,9 @@ const Login = () => {
           </button>
 
           <div className="flex items-center justify-center gap-1 w-full my-4">
-            <p className="font-[600] text-[#4F4E4E] dark:text-gray-300 text-[16px]">or</p>
+            <p className="font-semibold text-gray-600 dark:text-gray-400 text-[16px]">
+              or
+            </p>
           </div>
 
           <a

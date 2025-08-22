@@ -57,11 +57,11 @@ const SignUp = () => {
   return (
     <AuthWrapper>
       <div className="max-w-[500px] w-full">
-        <h1 className="text-[#181A20] dark:text-white font-semibold text-[22px] md:text-[28px] mb-3 leading-snug">
+        <h1 className="text-gray-900 dark:text-gray-100 font-semibold text-[22px] md:text-[28px] mb-3 leading-snug">
           Join our community of home seekers and explore the possibilities that
           await.
         </h1>
-        <p className="text-[#181A20D1] dark:text-gray-300 text-[16px] mb-5">
+        <p className="text-gray-700 dark:text-gray-300 text-[16px] mb-5">
           Let’s get started by filling out the information below
         </p>
 
@@ -201,7 +201,7 @@ const SignUp = () => {
             />
             <label
               htmlFor="terms"
-              className="text-[#181A20D1] dark:text-gray-300 text-[15px]"
+              className="text-gray-700 dark:text-gray-300 text-[15px]"
             >
               I agree to{" "}
               <span className="text-[#3D9970]">Terms of Service</span> and
