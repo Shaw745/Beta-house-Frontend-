@@ -65,7 +65,7 @@ const SignUp = () => {
           Let’s get started by filling out the information below
         </p>
 
-        <form onSubmit={handleSubmit(handleRegister)} className="space-y-4">
+        <form onSubmit={handleSubmit(handleRegister)} className="space-y-4 ">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <label htmlFor="fname" className="alroe">
@@ -77,7 +77,7 @@ const SignUp = () => {
                 {...register("firstName")}
                 placeholder="Enter Name"
                 className={twMerge(
-                  "w-full px-3 py-3 border-2 rounded-md outline-none",
+                  "w-full px-3 py-3 border-2 rounded-md outline-none  placeholder:text-gray-400 ",
                   errors.firstName && "border-red-400"
                 )}
               />
@@ -97,7 +97,7 @@ const SignUp = () => {
                 {...register("lastName")}
                 placeholder="Enter Name"
                 className={twMerge(
-                  "w-full px-3 py-3 border-2 rounded-md outline-none",
+                  "w-full px-3 py-3 border-2 rounded-md outline-none  placeholder:text-gray-400",
                   errors.lastName && "border-red-400"
                 )}
               />
@@ -119,7 +119,7 @@ const SignUp = () => {
               {...register("email")}
               placeholder="Enter your Email"
               className={twMerge(
-                "w-full px-3 py-3 border-2 rounded-md outline-none",
+                "w-full px-3 py-3 border-2 rounded-md outline-none  placeholder:text-gray-400",
                 errors.email && "border-red-400"
               )}
             />
@@ -138,7 +138,7 @@ const SignUp = () => {
               {...register("password")}
               placeholder="Enter your password"
               className={twMerge(
-                "w-full px-3 py-3 border-2 rounded-md outline-none",
+                "w-full px-3 py-3 border-2 rounded-md outline-none  placeholder:text-gray-400",
                 errors.password && "border-red-400"
               )}
             />
@@ -157,7 +157,7 @@ const SignUp = () => {
               {...register("confirmPassword")}
               placeholder="Confirm your password"
               className={twMerge(
-                "w-full px-3 py-3 border-2 rounded-md outline-none",
+                "w-full px-3 py-3 border-2 rounded-md outline-none  placeholder:text-gray-400",
                 errors.confirmPassword && "border-red-400"
               )}
             />

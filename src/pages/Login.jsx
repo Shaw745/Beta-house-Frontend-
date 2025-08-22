@@ -66,7 +66,7 @@ const Login = () => {
             type="email"
             id="email"
             placeholder="Enter your Email"
-            className="int"
+            className="int  placeholder:text-gray-400"
             {...register("email")}
           />
           {errors.email && (
@@ -81,7 +81,7 @@ const Login = () => {
             type="password"
             id="password"
             placeholder="Enter your password"
-            className="int"
+            className="int  placeholder:text-gray-400"
             {...register("password")}
           />
           {errors.password && (
